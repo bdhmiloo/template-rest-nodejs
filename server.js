@@ -50,7 +50,7 @@ app.get('/', (req, res) => {
     res.send({ express: 'Bazinga! Your API is working fine.' });
 });
 
-// const userRoutes = require('./api/user/userRoutes');
+// const userRoutes = require('./app/user/userRoutes');
 
 // app.use(prefix + '/users', userRoutes);
 
