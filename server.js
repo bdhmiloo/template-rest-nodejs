@@ -21,7 +21,7 @@ mongoose.connect(
 );
 const monDb = mongoose.connection;
 
-monDb.on('error', function() {
+monDb.on('error', function () {
     console.error('MongoDB Connection Error. Please make sure that', config.MONGO_DB_NAME, 'is running.');
 });
 
@@ -34,7 +34,7 @@ monDb.once('open', function callback() {
 const app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(cors());
 
@@ -45,19 +45,18 @@ const prefix = config.API_PREFIX;
 
 // ================== ROUTES ==================
 
-// GET /hello
 app.get('/', (req, res) => {
     res.send({ express: 'Bazinga! Your API is working fine.' });
 });
 
-// const userRoutes = require('./app/user/userRoutes');
+const userRoutes = require('./app/routes/userRoutes');
 
-// app.use(prefix + '/users', userRoutes);
+app.use(prefix + '/users', userRoutes);
 
 // ================== ERROR HANDLER ==================
 
 // 404
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
@@ -65,7 +64,7 @@ app.use(function(req, res, next) {
 
 // DEV: does print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res) {
+    app.use(function (err, req, res) {
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -75,7 +74,7 @@ if (app.get('env') === 'development') {
 }
 
 // PROD: does not print stacktrace
-app.use(function(err, req, res) {
+app.use(function (err, req, res) {
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,
