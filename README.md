@@ -1,2 +1,2 @@
-# template-rest-nodejs
-My template for creating a REST API based on expressjs.
+# Node Express Starter
+A template for creating REST APIs using the expressjs framework for nodejs.

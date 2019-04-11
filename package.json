@@ -1,0 +1,43 @@
+{
+  "name": "express-starter",
+  "version": "1.0.0",
+  "description": "Template for creating a REST API based on the expressjs framework",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "docker": "docker build -t express-starter/api . && docker run -d -p 9080:3000 express-starter/api",
+    "clean": "rimraf node_modules && npm cache clean --force",
+    "clean:install": "npm run clean && npm install",
+    "clean:start": "npm run clean-install && npm run start",
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bdhmiloo/node-express-starter.git"
+  },
+  "author": "Duc Huy BUI",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bdhmiloo/node-express-starter/issues"
+  },
+  "homepage": "https://github.com/bdhmiloo/node-express-starter#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^5.16.0",
+    "mocha": "^6.1.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "console-stamp": "^0.2.7",
+    "cors": "^2.8.5",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
+    "mongodb": "^3.2.3",
+    "mongoose": "^5.5.0",
+    "morgan": "^1.9.1"
+  }
+}
