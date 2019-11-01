@@ -2,14 +2,15 @@ const config = require('../../config/config');
 const jwt = require('jsonwebtoken');
 
 const checkToken = (req, res, next) => {
-    const token = req.headers.authorization.split(' ')[1];
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
     if (token) {
+        token = token.split(' ')[1];
+
         jwt.verify(token, config.JWT_SECRET, (err, decoded) => {
             if (err) {
                 return res.status(401).json({
-                    status: 'success',
-                    code: '401',
+                    success: 'false',
                     message: 'Token is not valid'
                 });
             } else {
@@ -18,9 +19,8 @@ const checkToken = (req, res, next) => {
             }
         });
     } else {
-        return res.status(401).json({
-            status: 'success',
-            code: '401',
+        return res.status(403).json({
+            success: 'false',
             message: 'Auth token is not supplied'
         });
     }
